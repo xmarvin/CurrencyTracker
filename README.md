@@ -15,16 +15,22 @@ rake db:seed
 Testing
 -------
 
-Run tests with:
+Run all test with:
 
 ```bash
-RAILS_ENV=test rake test
+bundle exec rake travis
+```
+
+Run unit tests with:
+
+```bash
+bundle exec rake test
 ```
 
 Cucumber features can be run with:
 
 ```bash
-cucumber
+bundle exec rake cucumber
 ```
 
 Features

@@ -140,7 +140,6 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
-  cucumber
   cucumber-rails
   database_cleaner
   nokogiri

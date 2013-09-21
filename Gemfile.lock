@@ -148,12 +148,11 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
-  cucumber
   cucumber-rails
   database_cleaner
   jquery-rails (~> 2.2.0)
   nokogiri
   rails (= 3.2)
-  savon
+  savon (~> 1.0)
   sqlite3
   uglifier (>= 1.0.3)

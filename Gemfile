@@ -4,7 +4,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.2'
 gem 'sqlite3'
-gem 'savon'
+gem 'savon', '~>1.0'
 gem 'nokogiri'
 
 group :development do

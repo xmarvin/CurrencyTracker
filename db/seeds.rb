@@ -7,3 +7,4 @@
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
 DataUpdater.update
+User.create email: "mr.smart@google.com", password: 'qweqwe'

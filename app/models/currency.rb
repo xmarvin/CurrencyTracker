@@ -9,11 +9,11 @@ class Currency < ActiveRecord::Base
   belongs_to :country
 
   def self.collected
-    all.select {|currency| currency.collected? }
+    @collected ||= Currency.joins(:country).where(countries: { visited: true})
   end
 
   def self.not_collected
-    all.reject {|currency| currency.collected? }
+    @not_collected ||= Currency.joins(:country).where(countries: { visited: false})
   end
 
   def collected?

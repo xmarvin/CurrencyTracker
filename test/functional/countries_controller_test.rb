@@ -2,10 +2,12 @@ require 'test_helper'
 
 class CountriesControllerTest < ActionController::TestCase
   should_not_respond_to_actions :new => :get, :destroy => :get
-
+  include Devise::TestHelpers
   setup do
     @country = countries(:one)
     @controller = CountriesController.new
+    @user = users(:smart)
+    sign_in(@user)
   end
 
   test "should get index" do

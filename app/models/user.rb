@@ -6,5 +6,18 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  # attr_accessible :title, :body
+  has_many :visits
+
+  def visited_countries_count
+    @visited_countries_count ||= visits.count
+  end
+
+  def not_visited_countries_count
+    @not_visited_countries_count ||= Country.count - visited_countries_count
+  end
+
+  def visited?(country)
+    visits.where(country_id: country.id).exists?
+  end
+
 end

@@ -2,11 +2,16 @@ class CountriesController < ApplicationController
   # GET /countries
   # GET /countries.xml
   def index
-    @countries = Country.all
+    @countries = Country
+      .joins("left join visits on visits.country_id = countries.code AND visits.user_id = #{current_user.id}")
+      .group('countries.code')
+      .select('name, code, COUNT(visits.user_id) > 0 as visited')
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @countries }
+
+      format.json { render json: @countries.as_json({methods: [:visited], only: [ :name, :code]}) }
     end
   end
 

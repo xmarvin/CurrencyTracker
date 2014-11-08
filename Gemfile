@@ -3,7 +3,6 @@ ruby '2.1.4'
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.15'
-gem 'sqlite3'
 gem 'savon', '~>1.0'
 gem 'nokogiri'
 gem 'devise'
@@ -11,6 +10,11 @@ gem 'will_paginate'
 group :development do
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
 end
 
 group :test do

@@ -11,6 +11,12 @@ class Country < ActiveRecord::Base
 
   accepts_nested_attributes_for :currencies, :allow_destroy => true
 
+  scope :visited_info_for,  lambda { |user|
+    joins("left join visits on visits.country_id = countries.code AND visits.user_id = #{user.id}")
+    .group('countries.code')
+    .select('name, code, COUNT(visits.user_id) as visited_count')
+  }
+
   def visited_by?(user)
     visits.where(user_id: user.id).exists?
   end

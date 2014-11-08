@@ -12,6 +12,14 @@ angular.module('trackerApp').controller "CountriesController", ($scope, Countrie
     changed_countries = $.grep $scope.countries, (c) -> c.checked != c.visited
     changed_countries.length
 
+  $scope.checkAll = () ->
+    if $scope.selectedAll
+      $scope.selectedAll = false
+    else
+      $scope.selectedAll = true
+
+    angular.forEach $scope.countries, (item) ->
+      item.checked = $scope.selectedAll
 
   $scope.markVisited = () ->
     console.log "mark visited"
@@ -31,9 +39,11 @@ angular.module('trackerApp').controller "CountriesController", ($scope, Countrie
 
   loadCountries = =>
     $scope.isLoading = true
+    $scope.selectedAll = true
     @countriesService.all (res) =>
       $scope.isLoading = false
       $scope.countries = $.map res, (country) ->
+        $scope.selectedAll = $scope.selectedAll && country.visited
         country.checked = country.visited
         country
 

@@ -1,26 +1,30 @@
 <section>
-    <div id="visited_countries_chart" class="simple_pie_chart" width='300px' height='100px'>
-        <table>
-            <tr>
-                <th>Visited</th>
-                <td>5</td>
-            </tr><tr>
-            <th>Not Visited</th>
-            <td>50</td>
-        </tr>
-        </table>
+    <div ng-if="isLoading">
+        Loading...
     </div>
+    <div ng-if="!isLoading">
+<div ng-controller="CountriesStatsController as statsCtl">
+    <div id="visited_countries_chart" simple-pie class="simple_pie_chart" width='300' height='100'>
+    </div>
+</div>
 
     <h1>Countries</h1>
-
+   <div style="clear: both"></div>
+   <div>
+       <button ng-disabled="changedCountriesCount() == 0" ng-click="markVisited()">Visit selected</button>
+   </div>
     <table>
         <tr>
+            <th>CheckAll</th>
             <th>Name</th>
             <th>Code</th>
             <th>Status</th>
             <th></th>
         </tr>
         <tr ng-repeat="country in countries">
+            <td>
+                <input type="checkbox" ng-model="country.checked"/>
+            </td>
             <td>{{ country.name }}</td>
             <td>{{ country.code }}</td>
             <td>
@@ -34,4 +38,5 @@
             <td><a href="/#/countries/{{ country.code }}">Show</a></td>
         </tr>
     </table>
+    </div>
 </section>

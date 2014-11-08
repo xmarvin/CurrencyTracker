@@ -7,13 +7,17 @@ var SimplePieChart = {};
 SimplePieChart.initialize = function(root_element) { return new ViewController(root_element, {
   initialize: function() {
     this.sets = {};
+    console.log(this.root);
     this.width  = parseInt( this.root.getAttribute('width') );
     this.height = parseInt( this.root.getAttribute('height') );
 
     var sets = $(this.root).find('tr');
+    console.log(sets);
     for( var i = 0; i < sets.length; i++ ) {
       var set_name = $(sets[i]).find('th').html();
+      console.log($(sets[i]).find('td'));
       var set_value = parseInt( $(sets[i]).find('td').html() );
+      console.log(set_value);
       this.sets[set_name] = set_value;
     }
 
@@ -72,9 +76,3 @@ SimplePieChart.initialize = function(root_element) { return new ViewController(r
     return raw_value / this.raw_total();
   }
 })};
-
-$(document).ready(function() {
-  $('.simple_pie_chart').each(function() {
-    SimplePieChart.initialize(this);
-  });
-})

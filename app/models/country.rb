@@ -16,7 +16,7 @@ class Country < ActiveRecord::Base
   end
 
   def visited
-    read_attribute(:visited)
+    read_attribute(:visited_count ).to_i > 0
   end
 
 end

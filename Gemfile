@@ -7,6 +7,7 @@ gem 'sqlite3'
 gem 'savon', '~>1.0'
 gem 'nokogiri'
 gem 'devise'
+gem 'will_paginate'
 group :development do
   gem 'capybara'
   gem 'database_cleaner'

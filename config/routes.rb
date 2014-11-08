@@ -7,6 +7,7 @@ CurrencyTracker::Application.routes.draw do
   resources :visits, :only => [] do
     collection do
       post :bulk_update
+      get :counts
     end
   end
 

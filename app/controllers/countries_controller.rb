@@ -2,13 +2,18 @@ class CountriesController < ApplicationController
   # GET /countries
   # GET /countries.xml
   def index
+    page = params[:page] || 1
+    per_page = params[:per_page] || 50
+    token = params[:token]
     @countries = Country
+      .where("countries.name LIKE :token OR countries.code LIKE :token", {token: "%#{token}%"})
       .joins("left join visits on visits.country_id = countries.code AND visits.user_id = #{current_user.id}")
       .group('countries.code')
-      .select('name, code, COUNT(visits.user_id) > 0 as visited')
+      .select('name, code, COUNT(visits.user_id) as visited_count')
+      .paginate(page: page, per_page: per_page)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html {  render 'home/index' }
       format.xml  { render :xml => @countries }
 
       format.json { render json: @countries.as_json({methods: [:visited], only: [ :name, :code]}) }
@@ -26,40 +31,4 @@ class CountriesController < ApplicationController
     end
   end
 
-  # GET /countries/1/edit
-  def edit
-    @country = Country.find(params[:id])
-  end
-
-  # POST /countries
-  # POST /countries.xml
-  def create
-    @country = Country.new(params[:country])
-
-    respond_to do |format|
-      if @country.save
-        format.html { redirect_to(@country, :notice => 'Country was successfully created.') }
-        format.xml  { render :xml => @country, :status => :created, :location => @country }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @country.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /countries/1
-  # PUT /countries/1.xml
-  def update
-    @country = Country.find(params[:id])
-
-    respond_to do |format|
-      if @country.update_attributes(params[:country])
-        format.html { redirect_to(@country, :notice => 'Country was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @country.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
 end

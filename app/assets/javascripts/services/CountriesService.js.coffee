@@ -11,7 +11,7 @@ angular.module('trackerApp').factory 'CountriesService', ($resource, $q, $http) 
       defaults.patch = defaults.patch || {}
       defaults.patch['Content-Type'] = 'application/json'
 
-    all: (successCallback) =>
-      @service.query (res) =>
+    search: (page, q, successCallback) =>
+      @service.get {page: page, q: q}, (res) =>
         successCallback(res)
       , @errorHandler

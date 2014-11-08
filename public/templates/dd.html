@@ -1,0 +1,64 @@
+<section>
+    <div ng-if="isLoading">
+        Loading...
+    </div>
+    <div ng-if="!isLoading">
+        <div ng-controller="CountriesStatsController as statsCtl">
+            <div id="visited_countries_chart" simple-pie class="simple_pie_chart" width='300' height='100'>
+            </div>
+        </div>
+
+        <h1>Countries</h1>
+
+        <div style="clear: both"></div>
+        <div style="float: left">
+            <button ng-disabled="changedCountriesCount() == 0" ng-click="markVisited()">Visit selected</button>
+        </div>
+        <div style="float: right">
+            <input class="search-query" type="search" ng-model="searchText" >
+        </div>
+        <div style="clear: both"></div>
+        <table>
+            <tr>
+                <th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()"></th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+            <tr ng-repeat="country in countries">
+                <td>
+                    <input type="checkbox" ng-model="country.checked"/>
+                </td>
+                <td>{{ country.name }}</td>
+                <td>{{ country.code }}</td>
+                <td>
+                <span ng-if="country.visited">
+                  Visited
+                </span>
+                <span ng-if="!country.visited">
+                  Not visited
+                </span>
+                </td>
+                <td><a href="/#/countries/{{ country.code }}">Show</a></td>
+            </tr>
+        </table>
+        <div class="pagination" ng-if="pagination.total_pages > 0">
+            <ul class="pagination">
+                <li class="prev previous_page" ng-class="{disabled: pagination.current_page <= 1 }">
+                    <a href="#" ng-click="prevPage()">« Prev</a>
+                </li>
+
+
+                <li><a href="#">
+                    {{pagination.current_page}} / {{pagination.total_pages}}
+                </a></li>
+
+                <li class="next next_page" ng-class="{disabled: pagination.current_page >=  pagination.total_pages }">
+                    <a rel="next" ng-click="nextPage()" href="#">Next →</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</section>

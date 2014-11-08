@@ -1,6 +1,13 @@
 <section>
+    <div ng-if="isLoading">
+        Loading...
+    </div>
     <div ng-controller="CountriesStatsController as statsCtl">
         <div id="visited_countries_chart" simple-pie class="simple_pie_chart" width='300' height='100'>
+        </div>
+        <hr/>
+        <div id="progress_chart" progress-chart>
+
         </div>
     </div>
     <h1>Countries</h1>

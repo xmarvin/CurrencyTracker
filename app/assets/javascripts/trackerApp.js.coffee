@@ -6,6 +6,9 @@ trackerApp.config ($httpProvider, $parseProvider) ->
 
 trackerApp.config ($routeProvider, $locationProvider) ->
   $locationProvider.html5Mode true
-  $routeProvider.when '/',  templateUrl: '/templates/countries.html', controller: 'CountriesController'
   $routeProvider.when '/countries',  templateUrl: '/templates/countries.html', controller: 'CountriesController'
   $routeProvider.when '/currencies',  templateUrl: '/templates/countries.html', controller: 'CountriesController'
+
+
+angular.element(document).ready () ->
+  angular.bootstrap($('body').get(0), ['trackerApp']);

@@ -1,4 +1,5 @@
 class VisitsController < ApplicationController
+  require 'csv'
   def bulk_update
     bulk = params[:bulk]
     if bulk
@@ -15,6 +16,13 @@ class VisitsController < ApplicationController
   def counts
     render json: {visited: current_user.visited_countries_count,
                   unvisited: current_user.not_visited_countries_count}
+  end
+
+  def chart_data
+    json = current_user.visits.group('DATE(created_at)').select('count(*) as count, DATE(created_at) as date').map do |visit|
+      [Time.parse(visit.date).to_i * 1000, visit.count]
+    end
+    render json: json
   end
 
 end

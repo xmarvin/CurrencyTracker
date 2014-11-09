@@ -8,7 +8,7 @@ trackerApp.config ($routeProvider, $locationProvider) ->
   $locationProvider.html5Mode true
   $routeProvider.when '/',  templateUrl: '/templates/info.html'
   $routeProvider.when '/countries',  templateUrl: '/templates/countries.html', controller: 'CountriesController'
-  $routeProvider.when '/currencies',  templateUrl: '/templates/countries.html', controller: 'CountriesController'
+  $routeProvider.when '/currencies',  templateUrl: '/templates/currencies.html', controller: 'CurrenciesController'
 
 
 angular.element(document).ready () ->

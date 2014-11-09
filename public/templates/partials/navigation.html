@@ -1,0 +1,14 @@
+<div class="pagination" ng-if="pagination.total_pages > 0">
+
+            <span class="prev previous_page">
+                <a href="#" ng-click="prevPage()" ng-class="{disabled: pagination.current_page <= 1 }">Prev</a>
+            </span>
+
+
+            <span>
+                {{pagination.current_page}} / {{pagination.total_pages}}
+            </span>
+            <span class="next next_page">
+                <a rel="next" ng-click="nextPage()" ng-class="{disabled: pagination.current_page >=  pagination.total_pages }" href="#">Next</a>
+            </span>
+</div>

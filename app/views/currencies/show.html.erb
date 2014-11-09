@@ -12,12 +12,12 @@
 
 <p>
   <b>Status:</b>
-  <%= @currency.collected? ? 'Collected' : 'Not Collected' %>
+  <%= @currency.collected_by?(current_user) ? 'Collected' : 'Not Collected' %>
 </p>
 
 <p>
   <b>Country:</b>
-  <%= @currency.country.nil? ? 'None' : link_to(@currency.country.name, @currency.country) %>
+  <%= @currency.country.nil? ? 'None' : link_to(@currency.country_name, @currency.country) %>
 </p>
 
 <%= link_to 'Back', currencies_path %>

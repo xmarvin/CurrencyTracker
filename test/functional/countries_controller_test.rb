@@ -37,16 +37,6 @@ class CountriesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, :id => @country.to_param
-    assert_response :success
-  end
-
-  test "should update country" do
-    put :update, :id => @country.to_param, :country => @country.attributes
-    assert_redirected_to country_path(assigns(:country))
-  end
-
   test 'should return correct chart data' do
     get :chart_data
     assert_response :success

@@ -14,6 +14,7 @@ class CurrenciesController extends BaseCollectionController
       options = $.map changedCurrencies(), (currency) -> {code: currency.country_id, checked: currency.checked}
       @scope.isLoading = true
       VisitsService.bulkUpdate(options).then =>
+        @scope.$broadcast('visits:new')
         @loadCollection(@currentPage(), @scope.searchText)
 
     @collectionService = new CollectionService(BaseCollectionController.serverErrorHandler)
@@ -31,7 +32,7 @@ class CurrenciesController extends BaseCollectionController
   onCollectionLoaded: (res) =>
     super(res)
     @scope.currencies = $.map res.currencies, (currency) =>
-      @scope.selectedAll = @scope.selectedAll && currency.visited
+      @scope.selectedAll = @scope.selectedAll && currency.collected
       currency.checked = currency.collected
       currency
 

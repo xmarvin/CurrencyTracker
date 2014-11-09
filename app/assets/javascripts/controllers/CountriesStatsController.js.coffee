@@ -1,8 +1,15 @@
-angular.module('trackerApp').controller "CountriesStatsController", ($scope, StatsService) ->
-  $scope.counts = [0,0]
-  $scope.countsLabels = ['Visited', 'Not visited']
-  StatsService.getVisitsCounts().then (response) ->
-    $scope.counts = [response.data.visited, response.data.unvisited]
-  StatsService.getVisitsChartData().then (data) ->
-    $scope.chartData = data
-  $scope
+class CountriesStatsController extends BaseStatsController
+  @$inject: ['$scope', 'StatsService', '$q']
+  constructor: (@scope, StatsService, @q) ->
+    @scope.counts = [0,0]
+    @scope.countsLabels = ['Visited', 'Not visited']
+    @StatsService  = StatsService
+    super(@scope)
+
+  loadStats: =>
+    @q.all([@StatsService.getVisitsCounts(), @StatsService.getVisitsChartData()]).then (results)=>
+      @scope.counts = [results[0].data.visited, results[0].data.unvisited]
+      @scope.chartData = results[1]
+
+
+angular.module('trackerApp').controller "CountriesStatsController", CountriesStatsController

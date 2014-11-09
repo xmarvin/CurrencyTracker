@@ -27,7 +27,6 @@
             <th>Country</th>
             <th>Code</th>
             <th>Status</th>
-            <th></th>
         </tr>
         <tr ng-repeat="currency in currencies">
             <td>
@@ -43,8 +42,6 @@
                 <span ng-if="!currency.collected">
                   Not collected
                 </span>
-            </td>
-            <td><a href="/#/currencies/{{ currency.code }}">Show</a>
             </td>
         </tr>
     </table>

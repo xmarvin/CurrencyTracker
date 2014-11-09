@@ -15,6 +15,7 @@ class CountriesController extends BaseCollectionController
       options = $.map changedCountries(), (country) -> {code: country.code, checked: country.checked}
       @scope.isLoading = true
       VisitsService.bulkUpdate(options).then =>
+        @scope.$broadcast('visits:new')
         @loadCollection(@currentPage(), @scope.searchText)
     @countriesService = new CountriesService(BaseCollectionController.serverErrorHandler)
 

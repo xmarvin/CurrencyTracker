@@ -4,7 +4,7 @@
         </div>
         <div style="clear: both"></div>
         <hr/>
-        <div  id="progress_chart" progress-chart title="Countries">
+        <div id="progress_chart" progress-chart title="Countries">
         </div>
     </div>
     <br>
@@ -28,7 +28,6 @@
             <th>Name</th>
             <th>Code</th>
             <th>Status</th>
-            <th></th>
         </tr>
         <tr ng-repeat="country in countries">
             <td>
@@ -44,7 +43,6 @@
                   Not visited
                 </span>
             </td>
-            <td><a href="/#/countries/{{ country.code }}">Show</a></td>
         </tr>
     </table>
 </section>

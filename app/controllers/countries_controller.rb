@@ -61,9 +61,17 @@ class CountriesController < ApplicationController
   # PUT /countries/1.xml
   def update
     @country = Country.find(params[:id])
-
+    country_params = params[:country]
+    #NOTE: The design looks wrong. General user should not be able to update countries.
+    # But I want to leave it to make provided specs works
+    visited = country_params.delete(:visited)
+    if visited == '1'
+      @country.visit(current_user)
+    else
+      @country.not_visit(current_user)
+    end
     respond_to do |format|
-      if @country.update_attributes(params[:country])
+      if @country.update_attributes(country_params)
         format.html { redirect_to(@country, :notice => 'Country was successfully updated.') }
         format.xml  { head :ok }
       else

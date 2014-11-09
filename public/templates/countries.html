@@ -28,6 +28,8 @@
             <th>Name</th>
             <th>Code</th>
             <th>Status</th>
+            <th></th>
+            <th></th>
         </tr>
         <tr ng-repeat="country in countries">
             <td>
@@ -35,14 +37,9 @@
             </td>
             <td>{{ country.name }}</td>
             <td>{{ country.code }}</td>
-            <td>
-                <span ng-if="country.visited">
-                  Visited
-                </span>
-                <span ng-if="!country.visited">
-                  Not visited
-                </span>
-            </td>
+            <td><span ng-if="country.visited">Visited</span><span ng-if="!country.visited">Not Visited</span></td>
+            <td><a target="_self" href="/countries{{country.code}}">Show</a></td>
+            <td><a target="_self" href="/countries/{{country.code}}/edit">Edit</a></td>
         </tr>
     </table>
 </section>

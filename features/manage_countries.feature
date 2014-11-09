@@ -1,9 +1,10 @@
+@javascript
 Feature: Manage countries
   In order to manage his travel itinerary
   Mr. Smart
   wants to manage the countries he has visited.
-
   Scenario: List Countries
+    Given logged
     Given the following countries exist:
       |name|code|visited|
       |CountryOne|c1|false|
@@ -12,6 +13,7 @@ Feature: Manage countries
       |CountryFour|c4|true|
       |CountryFive|c5|true|
     And I am on the countries page
+    Then wait
     Then I should see the following table:
       |Name|Code|Status|
       |CountryOne|c1|Not Visited|
@@ -21,6 +23,7 @@ Feature: Manage countries
       |CountryFive|c5|Visited|
 
   Scenario: Visit Country
+    Given logged
     Given I am on a country page
     When I follow "Edit"
     And I check "Visited"

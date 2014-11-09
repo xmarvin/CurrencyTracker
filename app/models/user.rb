@@ -24,7 +24,6 @@ class User < ActiveRecord::Base
     @not_collected_currencies_count ||= Currency.count - collected_currencies_count
   end
 
-
   def visited?(country)
     visits.where(country_id: country.id).exists?
   end

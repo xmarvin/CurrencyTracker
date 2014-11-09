@@ -21,6 +21,18 @@ class Country < ActiveRecord::Base
     visits.where(user_id: user.id).exists?
   end
 
+  def visit(user)
+    unless visited_by?(user)
+      visits.create(user_id: user.id)
+    end
+  end
+
+  def not_visit(user)
+    if visited_by?(user)
+      visits.where(user_id: user.id).delete_all
+    end
+  end
+
   def visited
     read_attribute(:visited_count ).to_i > 0
   end

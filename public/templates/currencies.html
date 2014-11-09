@@ -27,6 +27,7 @@
             <th>Country</th>
             <th>Code</th>
             <th>Status</th>
+            <th></th>
         </tr>
         <tr ng-repeat="currency in currencies">
             <td>
@@ -43,6 +44,7 @@
                   Not collected
                 </span>
             </td>
+            <td><a target="_self" href="/currencies/{{country.code}}">Show</a></td>
         </tr>
     </table>
 </section>

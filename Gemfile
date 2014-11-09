@@ -18,6 +18,7 @@ group :production do
 end
 
 group :test do
+  gem 'selenium-webdriver'
   gem 'cucumber-rails', :require => false
 end
 

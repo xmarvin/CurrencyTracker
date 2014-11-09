@@ -41,6 +41,13 @@ When /^(.*) within ([^:]+):$/ do |step, parent, table_or_string|
   with_scope(parent) { When "#{step}:", table_or_string }
 end
 
+Given /logged/ do
+  User.create! email: 'smart@gmail.com', password: 'welcome'
+  visit '/users/sign_in/'
+  fill_in('user[email]', with: 'smart@gmail.com')
+  fill_in('user[password]', with: 'welcome')
+  click_button('Log in')
+end
 Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
 end
@@ -148,6 +155,10 @@ Then /^the "([^"]*)" field(?: within (.*))? should contain "([^"]*)"$/ do |field
       assert_match(/#{value}/, field_value)
     end
   end
+end
+
+Then /wait/ do
+  sleep 5
 end
 
 Then /^the "([^"]*)" field(?: within (.*))? should not contain "([^"]*)"$/ do |field, parent, value|

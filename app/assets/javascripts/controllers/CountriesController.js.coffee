@@ -1,25 +1,20 @@
 class CountriesController extends BaseCollectionController
-  @$inject: ['$scope', '$timeout','CountriesService', '$http']
-  constructor: (@scope, @timeout, CountriesService, @http) ->
+  @$inject: ['$scope', '$timeout','CountriesService', 'VisitsService']
+  constructor: (@scope, @timeout, CountriesService, VisitsService) ->
     super(@scope, @timeout)
 
     @scope.countries = []
 
+    changedCountries = =>
+      $.grep @scope.countries, (c) -> c.checked != c.visited
+
     @scope.changedCountriesCount = () =>
-      changed_countries = $.grep @scope.countries, (c) -> c.checked != c.visited
-      changed_countries.length
+      changedCountries().length
 
     @scope.markVisited = () =>
-      changed_countries = $.grep @scope.countries, (c) -> c.checked != c.visited
-      options = $.map changed_countries, (country) -> {code: country.code, checked: country.checked}
-      console.log options
+      options = $.map changedCountries(), (country) -> {code: country.code, checked: country.checked}
       @scope.isLoading = true
-      request = @http
-        method: 'post',
-        url: 'visits/bulk_update.json',
-        data:
-          bulk: options
-      request.then =>
+      VisitsService.bulkUpdate(options).then =>
         @loadCollection(@currentPage(), @scope.searchText)
     @countriesService = new CountriesService(BaseCollectionController.serverErrorHandler)
 

@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.expand_path("../../test_helper", __FILE__)
 
 class CountriesControllerTest < ActionController::TestCase
   should_not_respond_to_actions :new => :get, :destroy => :get
@@ -46,4 +46,17 @@ class CountriesControllerTest < ActionController::TestCase
     put :update, :id => @country.to_param, :country => @country.attributes
     assert_redirected_to country_path(assigns(:country))
   end
+
+  test 'should return correct chart data' do
+    get :chart_data
+    assert_response :success
+    assert_equal [[1415484000000,1]], assigns(:chart_data)
+  end
+
+  test 'should return correct visiting counts' do
+    get :counts
+    assert_response :success
+    assert_equal({'visited' => 1, 'unvisited' => 2}, assigns(:counts))
+  end
+
 end

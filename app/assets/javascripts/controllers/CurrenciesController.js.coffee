@@ -5,13 +5,13 @@ class CurrenciesController extends BaseCollectionController
 
     @scope.currencies = []
 
-    @scope.changedCountriesCount = () =>
-      changed_countries = $.grep @scope.currencies, (c) -> c.checked != c.visited
-      changed_countries.length
+    changedCurrencies = => $.grep @scope.currencies, (c) -> c.checked != c.collected
+
+    @scope.changedCurrenciesCount = () =>
+      changedCurrencies().length
 
     @scope.markCollected = () =>
-      changed_currencies = $.grep @scope.currencies, (c) -> c.checked != c.collected
-      options = $.map changed_currencies, (currency) -> {code: currency.country_id, checked: currency.checked}
+      options = $.map changedCurrencies(), (currency) -> {code: currency.country_id, checked: currency.checked}
       @scope.isLoading = true
       VisitsService.bulkUpdate(options).then =>
         @loadCollection(@currentPage(), @scope.searchText)

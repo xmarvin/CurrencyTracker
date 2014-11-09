@@ -8,3 +8,7 @@ smart:
   id: 1
   email: 'mr.smart@gmail.com'
   encrypted_password: '$2a$10$3OF9YyLG6D8P8EqFFdudmeIUtIlnX2usIFYhAJ77pep5y93BLuSuu' #welcome
+lola:
+  id: 2
+  email: 'lola@gmail.com'
+  encrypted_password: '$2a$10$3OF9YyLG6D8P8EqFFdudmeIUtIlnX2usIFYhAJ77pep5y93BLuSuu' #welcome

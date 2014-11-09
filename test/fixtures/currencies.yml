@@ -3,9 +3,14 @@
 one:
   name: NameOne
   code: CodeOne
-  country: one
+  country_id: One
 
 two:
   name: NameTwo
   code: CodeTwo
-  country: two
+  country_id: Two
+
+three:
+  name: NameThree
+  code: CodeThree
+  country_id: One

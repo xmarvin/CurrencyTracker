@@ -16,6 +16,15 @@ class User < ActiveRecord::Base
     @not_visited_countries_count ||= Country.count - visited_countries_count
   end
 
+  def collected_currencies_count
+    @collected_currencies_count ||= visits.joins(:currencies).count
+  end
+
+  def not_collected_currencies_count
+    @not_collected_currencies_count ||= Currency.count - collected_currencies_count
+  end
+
+
   def visited?(country)
     visits.where(country_id: country.id).exists?
   end

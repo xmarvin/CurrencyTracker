@@ -2,18 +2,18 @@
     <div ng-if="isLoading">
         Loading...
     </div>
-    <!--
-    <div ng-controller="CountriesStatsController as statsCtl">
-        <div id="visited_countries_chart" simple-pie class="simple_pie_chart" width='300' height='100'>
+    <div ng-controller="CurrenciesStatsController as statsCtl">
+        <div id="collected_currencies_chart" simple-pie class="simple_pie_chart" width='300' height='100'>
         </div>
+        <div style="clear: both"></div>
         <hr/>
-        <div id="progress_chart" progress-chart>
+        <div id="progress_chart" progress-chart title="Currencies">
         </div>
-    </div>-->
+    </div>
     <h1>Currencies</h1>
     <div style="clear: both"></div>
     <div style="float: left">
-        <button ng-disabled="false" ng-click="markCollected()">Collected selected</button>
+        <button ng-disabled="changedCurrenciesCount() == 0" ng-click="markCollected()">Collected selected</button>
     </div>
     <div style="float: right">
         <input class="search-query" type="search" ng-model="searchText" placeholder="Search...">

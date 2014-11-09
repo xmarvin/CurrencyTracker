@@ -36,4 +36,17 @@ class CountriesController < ApplicationController
     end
   end
 
+  def counts
+    @counts = {visited: current_user.visited_countries_count,
+               unvisited: current_user.not_visited_countries_count}
+    render json: @counts
+  end
+
+  def chart_data
+    @chart_data = current_user.visits.group('DATE(created_at)').select('count(*) as count, DATE(created_at) as date').map do |visit|
+      [Date.parse(visit.date).to_time.to_i * 1000, visit.count]
+    end
+    render json: @chart_data
+  end
+
 end

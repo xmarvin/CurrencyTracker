@@ -2,13 +2,21 @@ CurrencyTracker::Application.routes.draw do
   devise_for :users
 
   root :to => "home#index"
-  resources :countries, :except => [:new, :destroy]
-  resources :currencies, :only => [:index, :show]
+  resources :countries, :except => [:new, :destroy] do
+    collection do
+      get :counts
+      get :chart_data
+    end
+  end
+  resources :currencies, :only => [:index, :show] do
+    collection do
+      get :counts
+      get :chart_data
+    end
+  end
   resources :visits, :only => [] do
     collection do
       post :bulk_update
-      get :counts
-      get :chart_data
     end
   end
 

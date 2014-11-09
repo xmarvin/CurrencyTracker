@@ -6,12 +6,10 @@ angular.module('trackerApp').directive 'simplePie', () ->
   link: (scope, element, attrs) ->
     width = attrs.width
     height = attrs.height
-    labels = ['Visited', 'Not Visited']
+    labels = scope.countsLabels
     values = [scope.counts.visisted, scope.counts.unvisited]
     scope.$watch 'counts', (counts) ->
-      console.log counts
-      values = [counts.visited, counts.unvisited]
-      console.log values
+      values = counts
       $(element).html(getImage())
 
     getImage = () ->

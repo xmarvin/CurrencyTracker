@@ -9,6 +9,7 @@ class @BaseCollectionController
 
   constructor: (@scope, @timeout) ->
     @scope.pagination = {}
+    @scope.checkAll = @checkAll
 
     @scope.nextPage = () =>
       page = @currentPage()

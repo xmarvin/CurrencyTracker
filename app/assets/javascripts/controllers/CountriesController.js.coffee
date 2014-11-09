@@ -9,8 +9,6 @@ class CountriesController extends BaseCollectionController
       changed_countries = $.grep @scope.countries, (c) -> c.checked != c.visited
       changed_countries.length
 
-    @scope.checkAll = @checkAll
-
     @scope.markVisited = () =>
       changed_countries = $.grep @scope.countries, (c) -> c.checked != c.visited
       options = $.map changed_countries, (country) -> {code: country.code, checked: country.checked}

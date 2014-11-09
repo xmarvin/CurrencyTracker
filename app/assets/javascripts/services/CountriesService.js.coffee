@@ -1,6 +1,6 @@
 angular.module('trackerApp').factory 'CountriesService', ($resource, $q, $http) ->
 
-  class TeamService
+  class CountriesService
     constructor: (errorHandler) ->
       @service = $resource('/countries/:id.json',
         {id: '@id'},

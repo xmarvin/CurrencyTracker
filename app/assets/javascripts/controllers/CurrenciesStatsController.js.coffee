@@ -8,7 +8,7 @@ class CurrenciesStatsController extends BaseStatsController
 
   loadStats: =>
     @q.all([@StatsService.getCurrenciesCounts(), @StatsService.getCurrenciesChartData()]).then (results)=>
-      @scope.counts = [results[0].data.visited, results[0].data.unvisited]
+      @scope.counts = [results[0].data.collected, results[0].data.uncollected]
       @scope.chartData = results[1]
 
 angular.module('trackerApp').controller "CurrenciesStatsController", CurrenciesStatsController

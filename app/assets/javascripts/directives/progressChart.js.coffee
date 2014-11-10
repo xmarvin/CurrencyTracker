@@ -18,8 +18,6 @@ angular.module('trackerApp').directive 'progressChart', () ->
     $(element).highcharts('StockChart', chart_options)
 
     scope.$watch 'chartData', (data) ->
-      console.log "watched"
-      console.log data
       chart = $(element).highcharts()
       chart.series[0].setVisible(false)
       if data
